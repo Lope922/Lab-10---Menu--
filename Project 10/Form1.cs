@@ -42,14 +42,6 @@ namespace Project_10
             InitializeComponent();
         }
 
-        //public struct Order
-        //{
-        //    //public string Dish;
-        //    //public List<string> Addons;
-        //    //public string addonString; 
-        //    //public int DishPrice; 
-        //}
-
         // create a variable to store the food type selected. 
         FoodTypes DishSelection = new FoodTypes();
         
@@ -59,7 +51,6 @@ namespace Project_10
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
         # region Main Dish Items
@@ -98,20 +89,24 @@ namespace Project_10
             if (DishSelection.ToString().Equals("none"))
             {
                 MessageBox.Show("please make a dish selection from the Dish Group Box", "No dish Selected");
-                
             }
-
+            
             else
             {
                 // start creating the order 
+                // set dish selection equal to the radio button checked. 
                 newOrder.Dish = DishSelection.ToString();
 
-                
+                //selected addons is the list of addons 
+                // so getaddons sould return a list or set the list equalt to the neworder selected addons
+                newOrder.SelectedAddons = GetAddOns();
+                newOrder.GetAddOnsTOaString =  AddOnListToString(); 
+                // next comes reading the selcted addons to a displayable text. 
 
+                // then go back and try to wokr with the prices. 
 
                 //newOrder.SelectedAddons = GetAddOns(newOrder);
                 DisplayAddOn(newOrder);
-             
             }
         }    
 
@@ -194,40 +189,30 @@ namespace Project_10
             }
         }
 
-        //public List<string> GetAddOns(GroupBox gbAddons, List<String> addOns)
-        public List<string> GetAddOns(Order obj)
+
+        public List<string> GetAddOns()
         {
             // use the list to store the addons
-            //original line of code that uses lambda expressions and loops over the control form 
-            //var checkedCbs = groupBox2.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked);
 
-            foreach (Control c in this.Controls)
-            {
-                if (c is CheckBox)
-                {
-                    CheckBox chk = (CheckBox)c;
-                    if (chk.Checked)
-                    {
-                        newOrder.SelectedAddons.Add(chk.Text.ToString());
-                    }
-                }
-            }
+            // sets 
+     //       var checkedCbs = groupBox2.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked);
 
-            if (obj.SelectedAddons.Count == 0)
-            {
-                // then don't display add ons 
-
-                // or addon's equals none 
-            }
-            else if (obj.SelectedAddons.Count > 0)
-            {
-                for (int i = 0; i < obj.SelectedAddons.Count - 1; i++)
-                {
-                    obj.GetAddOnsString += obj.SelectedAddons[i];
-                }
-            }
-            return newOrder.SelectedAddons;
+            List<string> AO = (groupBox2.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked).Select(c => c.Text).ToList());
+            newOrder.SelectedAddons = AO; 
+            return newOrder.SelectedAddons; 
         }
+
+        public string AddOnListToString()
+        {
+            int maxRange = newOrder.SelectedAddons.Count - 1; 
+            for (int i = 0; i < maxRange; i++)
+            {
+                newOrder.GetAddOnsTOaString += newOrder.SelectedAddons[i];
+                return newOrder.GetAddOnsTOaString; 
+            }
+            return newOrder.GetAddOnsTOaString; 
+        }
+        
         #endregion 
 
         public void DisplayAddOn(Order obj)
@@ -237,7 +222,7 @@ namespace Project_10
             //{
             //    obj.Dish  += s + ","; 
             //}
-            MessageBox.Show("Dish " + newOrder.Dish + "Dish Addons: " + newOrder.GetAddOnsTOaString + "Price:" + obj.DishPrice.ToString());
+            MessageBox.Show("Dish " + newOrder.Dish + " Dish Addons: " + newOrder.GetAddOnsTOaString + "Price:" + obj.DishPrice.ToString());
         }
         // Experimental below here 
         private void Form1_Load(object sender, EventArgs e)

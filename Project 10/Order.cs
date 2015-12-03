@@ -10,8 +10,9 @@ namespace Project_10
   public class Order
     {
         private string dish;
-        private List<string> addons;
-        // a series of strings; 
+       private List<string> addons;
+     
+      // a series of strings; 
        private string AddOnStringBuilder;
         private int dishPrice;
 
@@ -65,6 +66,10 @@ namespace Project_10
           }
           set
           {
+              for (int i = 0; i < addons.Count; i++)
+              {
+                  value = addons[i]; 
+              }
               AddOnStringBuilder += "" + value;
           }
       }
