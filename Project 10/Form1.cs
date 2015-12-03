@@ -53,6 +53,10 @@ namespace Project_10
             this.Close();
         }
 
+        //todo rewrite each method to refresh the checkbox and uncheck them each time the radiobutton changes position 
+
+        //work in the price as well 
+
         # region Main Dish Items
         // Check Changed events for main dishes -- Sets sets food type set to enumeration. 
         private void radioButtonHamburger_CheckedChanged(object sender, EventArgs e)
@@ -215,11 +219,6 @@ namespace Project_10
 
         public void DisplayAddOn(Order obj)
         {
-           // variable to store string 
-            //foreach (string s in obj.SelectedAddons)
-            //{
-            //    obj.Dish  += s + ","; 
-            //}
             MessageBox.Show("Dish " + newOrder.Dish + " Dish Addons: " + newOrder.GetAddOnsTOaString + "Price:" + obj.DishPrice.ToString());
         }
         // Experimental below here 
