@@ -190,25 +190,23 @@ namespace Project_10
         }
 
 
+
+        //this method reads the combo box and add its to the objects selected add on list 
         public List<string> GetAddOns()
         {
             // use the list to store the addons
-
-            // sets 
-     //       var checkedCbs = groupBox2.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked);
-
-            List<string> AO = (groupBox2.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked).Select(c => c.Text).ToList());
+            List<string> AO = (groupBoxAddOns.Controls.OfType<CheckBox>().Where(c => c.Visible && c.Checked).Select(c => c.Text).ToList());
             newOrder.SelectedAddons = AO; 
             return newOrder.SelectedAddons; 
         }
 
+        // this loops over the addons list and builds a string from its contents 
         public string AddOnListToString()
         {
             int maxRange = newOrder.SelectedAddons.Count - 1; 
             for (int i = 0; i < maxRange; i++)
             {
-                newOrder.GetAddOnsTOaString += newOrder.SelectedAddons[i];
-                return newOrder.GetAddOnsTOaString; 
+                newOrder.GetAddOnsTOaString += "" + newOrder.SelectedAddons[i];
             }
             return newOrder.GetAddOnsTOaString; 
         }

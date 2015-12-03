@@ -66,11 +66,7 @@ namespace Project_10
           }
           set
           {
-              for (int i = 0; i < addons.Count; i++)
-              {
-                  value = addons[i]; 
-              }
-              AddOnStringBuilder += "" + value;
+              AddOnStringBuilder = value; 
           }
       }
 
